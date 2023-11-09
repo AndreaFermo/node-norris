@@ -1,12 +1,12 @@
 const http = require("http");
 const dotenv = require("dotenv");
-const loadPhrases = require("./utilities/loadPhrases");
+//const loadPhrases = require("./utilities/loadPhrases");
 const loadAjaxData = require("./utilities/loadAjaxData");
 
 dotenv.config();
 
 const port = +process.env.PORT || 3000;
-
+/*
 const server = http.createServer((req, res) => {
     if (req.url === '/favicon.ico') res.writeHead(404).end();
 
@@ -25,11 +25,12 @@ const server = http.createServer((req, res) => {
     res.setHeader("Content-Type", "text/html;charset=utf-8");
     res.end(html.join(""));
 });
-
+*/
 const serverAsync = http.createServer((req, res) => {
     if (req.url === '/favicon.ico') res.writeHead(404).end();
 
     loadAjaxData.loadAjaxData((phrases) => {
+
         const html = [];
 
         html.push("<ul>");

@@ -9,12 +9,17 @@ function loadAjaxData(onSuccess) {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
+            if (phrases.includes(data.value)) {
+                console.log("duplicata");
+                loadAjaxData(onSuccess);
+            } else {
+                phrases.push(`${data.value}`);
 
-            phrases.push(`${data.value}`);
+                fs.writeFileSync(phrasesPath, JSON.stringify(phrases));
 
-            fs.writeFileSync(phrasesPath, JSON.stringify(phrases));
+                onSuccess(phrases);
+            }
 
-            onSuccess(phrases);
 
         })
 }
